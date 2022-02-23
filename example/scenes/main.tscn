@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/richpresence.gd" type="Script" id=1]
+
+[node name="GodotRichPresence" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -45.0
+margin_top = -10.0
+margin_right = 45.0
+margin_bottom = 10.0
+text = "SHUTDOWN"
+
+[connection signal="timeout" from="Timer" to="." method="run_callbacks"]
+[connection signal="button_up" from="Button" to="." method="shutdown"]

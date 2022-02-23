@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/397946__inspectorj__footsteps-snow-a.wav-dc91c5283eff041851b4a7b1a5d7fc49.sample"
+
+[deps]
+
+source_file="res://audio/397946__inspectorj__footsteps-snow-a.wav"
+dest_files=[ "res://.import/397946__inspectorj__footsteps-snow-a.wav-dc91c5283eff041851b4a7b1a5d7fc49.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

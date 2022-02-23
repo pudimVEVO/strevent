@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://models/Material.material" type="Material" id=1]
+[ext_resource path="res://shaders/psx cull_disabled.shader" type="Shader" id=2]
+[ext_resource path="res://models/5d5b1bdd268bd1745c4167effd382ac6 (1).jpg" type="Texture" id=3]
+[ext_resource path="res://scenes/post.gd" type="Script" id=4]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "post"
+surfaces/0 = {
+"aabb": AABB( -3.70208, -1, -1, 4.56811, 17.0078, 1.62243 ),
+"array_data": PoolByteArray( 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 147, 3, 193, 0, 8, 132, 234, 129, 160, 59, 165, 56, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 0, 129, 0, 0, 127, 0, 0, 129, 0, 58, 20, 56, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 109, 3, 193, 0, 248, 132, 234, 127, 160, 59, 165, 56, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 0, 3, 126, 0, 127, 0, 0, 127, 0, 60, 0, 60, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 0, 129, 0, 0, 127, 0, 0, 129, 169, 59, 245, 58, 215, 179, 93, 63, 0, 0, 128, 191, 1, 0, 0, 63, 109, 3, 193, 0, 248, 132, 234, 127, 0, 60, 0, 60, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 147, 3, 193, 0, 8, 132, 234, 129, 180, 56, 0, 60, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 0, 3, 126, 0, 127, 0, 0, 127, 180, 56, 0, 60, 216, 179, 93, 191, 0, 0, 128, 191, 253, 255, 255, 62, 0, 129, 0, 0, 127, 0, 0, 129, 86, 56, 245, 58, 0, 0, 0, 0, 236, 15, 128, 65, 0, 0, 0, 128, 147, 3, 193, 0, 8, 132, 234, 129, 0, 0, 0, 0, 0, 0, 0, 0, 236, 15, 128, 65, 0, 0, 0, 128, 0, 129, 0, 0, 0, 0, 126, 127, 34, 44, 255, 59, 0, 0, 0, 0, 236, 15, 128, 65, 0, 0, 0, 128, 0, 3, 126, 0, 127, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 236, 15, 128, 65, 0, 0, 0, 128, 109, 3, 193, 0, 248, 132, 234, 127, 0, 0, 0, 0, 172, 188, 40, 192, 236, 15, 128, 65, 97, 87, 31, 63, 0, 129, 0, 0, 0, 0, 126, 127, 81, 51, 218, 52, 172, 188, 40, 192, 236, 15, 128, 65, 97, 87, 31, 63, 47, 139, 0, 0, 0, 0, 126, 127, 81, 51, 218, 52, 170, 36, 41, 192, 236, 15, 128, 65, 64, 199, 120, 190, 0, 129, 0, 0, 0, 0, 126, 127, 0, 0, 212, 52, 170, 36, 41, 192, 236, 15, 128, 65, 64, 199, 120, 190, 47, 139, 0, 0, 0, 0, 126, 127, 0, 0, 212, 52, 232, 134, 108, 192, 81, 69, 121, 65, 97, 87, 31, 63, 47, 139, 0, 0, 0, 0, 126, 127, 81, 51, 143, 22, 230, 238, 108, 192, 81, 69, 121, 65, 64, 199, 120, 190, 47, 139, 0, 0, 0, 0, 126, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray( 2, 0, 5, 0, 12, 0, 1, 0, 8, 0, 4, 0, 3, 0, 7, 0, 11, 0, 6, 0, 0, 0, 9, 0, 13, 0, 10, 0, 15, 0, 16, 0, 17, 0, 14, 0, 16, 0, 18, 0, 17, 0 ),
+"blend_shape_data": [  ],
+"format": 97559,
+"index_count": 21,
+"material": ExtResource( 1 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 19
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/snapRes = 50.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.5
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = false
+shader_param/albedoTex = ExtResource( 3 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( 0, -1, -1, 0.866, -1, 0.5, 0, 16.0078, 0, 0, -1, -1, -0.866, -1, 0.5, 0.866, -1, 0.5, 0.866, -1, 0.5, -0.866, -1, 0.5, 0, 16.0078, 0, -0.866, -1, 0.5, 0, -1, -1, 0, 16.0078, 0, -2.6365, 16.0078, 0.6224, 0, 16.0078, 0, -2.6429, 16.0078, -0.2429, -2.6429, 16.0078, -0.2429, -3.6957, 15.5794, 0.6224, -2.6365, 16.0078, 0.6224, -2.6429, 16.0078, -0.2429, -3.7021, 15.5794, -0.2429, -3.6957, 15.5794, 0.6224 )
+
+[node name="post" type="MeshInstance"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 322.059, 143.757, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( -8.74228e-09, -0.193185, 0.0517638, 0, 0.0517638, 0.193185, -0.2, 8.44439e-09, -2.26267e-09, -3.4, 14.8, 0 )
+visible = false
+layers = 3
+light_color = Color( 0.827451, 0.745098, 0.964706, 1 )
+light_energy = 5.0
+light_indirect_energy = 9.35
+light_specular = 0.0
+spot_range = 40.0
+spot_attenuation = 1.46
+spot_angle = 60.0
+spot_angle_attenuation = 0.535

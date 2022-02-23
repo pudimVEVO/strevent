@@ -1,0 +1,127 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://menu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/menudynamicfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/hoverbutton.tres" type="StyleBox" id=3]
+[ext_resource path="res://fonts/Moonrising.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/SceneTransitionRect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://fonts/pressedbutton.tres" type="StyleBox" id=6]
+[ext_resource path="res://fonts/focusbutton.tres" type="StyleBox" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 27
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 4 )
+
+[node name="menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.101961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="title" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 15.0
+margin_right = 40.0
+margin_bottom = 35.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="title"]
+margin_right = 129.0
+margin_bottom = 35.0
+custom_fonts/font = SubResource( 1 )
+text = "Strevent"
+
+[node name="buttons" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -76.0
+margin_top = -97.0
+margin_right = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="buttons"]
+margin_right = 73.0
+margin_bottom = 25.0
+focus_neighbour_top = NodePath("../Quit")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+text = "Start"
+flat = true
+
+[node name="Options" type="Button" parent="buttons"]
+margin_top = 29.0
+margin_right = 73.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+text = "Options"
+flat = true
+
+[node name="Quit" type="Button" parent="buttons"]
+margin_top = 58.0
+margin_right = 73.0
+margin_bottom = 83.0
+focus_neighbour_bottom = NodePath("../Start")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/focus = ExtResource( 7 )
+text = "Quit"
+flat = true
+
+[node name="SceneTransitionRect" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="credits" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -100.0
+margin_right = 53.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="credits"]
+margin_right = 115.0
+margin_bottom = 82.0
+custom_fonts/font = SubResource( 2 )
+text = "Credits
+Pudim as developer
+'USM' as Hanne
+'Mago' as Ejvind
+'Iguana' as monsters"
+
+[connection signal="pressed" from="buttons/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="buttons/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="buttons/Quit" to="." method="_on_Quit_pressed"]

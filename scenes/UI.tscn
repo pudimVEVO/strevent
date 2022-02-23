@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/menudynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/Moonrising.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://textures/20083.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+font_data = ExtResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -60.0
+margin_right = 70.0
+margin_bottom = -10.0
+color = Color( 0.00392157, 0.00392157, 0.00392157, 0.427451 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -25.0
+margin_top = -20.0
+margin_right = 25.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "    Ammo"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
+margin_top = 18.0
+margin_right = 50.0
+margin_bottom = 37.0
+
+[node name="CurrentAmmo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+margin_right = 13.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 1 )
+text = "15"
+
+[node name="Fullammo" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 17.0
+margin_right = 36.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 1 )
+text = "/15"
+
+[node name="crosshair" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -7.8242
+margin_top = -6.31887
+margin_right = 312.176
+margin_bottom = 233.681
+rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 3 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}

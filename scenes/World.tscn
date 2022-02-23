@@ -1,0 +1,388 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/PauseScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/snowmap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/car.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/post.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Area2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://textures/snowflaketext.png" type="Texture" id=8]
+[ext_resource path="res://scenes/World.gd" type="Script" id=9]
+[ext_resource path="res://audio/161195__aleksnascimento__glock-shot-sound-effect.wav" type="AudioStream" id=10]
+[ext_resource path="res://scenes/UI.gd" type="Script" id=11]
+[ext_resource path="res://audio/154934__klawykogut__empty-gun-shot.wav" type="AudioStream" id=12]
+[ext_resource path="res://textures/pngegg.png" type="Texture" id=13]
+[ext_resource path="res://animations/scenesfireglock.tres" type="Animation" id=14]
+[ext_resource path="res://scenes/PauseScreen.gd" type="Script" id=15]
+[ext_resource path="res://audio/397946__inspectorj__footsteps-snow-a.wav" type="AudioStream" id=16]
+[ext_resource path="res://audio/atmospherestrevent.wav" type="AudioStream" id=17]
+[ext_resource path="res://scenes/inv.tscn" type="PackedScene" id=19]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type spatial;
+render_mode blend_add,depth_draw_opaque,cull_disabled,diffuse_burley,specular_schlick_ggx,unshaded;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float proximity_fade_distance;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+	MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0],CAMERA_MATRIX[1],CAMERA_MATRIX[2],WORLD_MATRIX[3]);
+}
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+	ALPHA = albedo.a * albedo_tex.a;
+	float depth_tex = textureLod(DEPTH_TEXTURE,SCREEN_UV,0.0).r;
+	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex*2.0-1.0,1.0);
+	world_pos.xyz/=world_pos.w;
+	ALPHA*=clamp(1.0-smoothstep(world_pos.z+proximity_fade_distance,world_pos.z,VERTEX.z),0.0,1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/proximity_fade_distance = 1.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+render_priority = 1
+emission_shape = 2
+emission_box_extents = Vector3( 50, 250, 250 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 14.0
+initial_velocity_random = 0.52
+angular_velocity = 10.0
+angular_velocity_random = 1.0
+angle_random = 1.0
+
+[sub_resource type="QuadMesh" id=4]
+size = Vector2( 0.3, 0.3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "holsterglock"
+tracks/0/type = "value"
+tracks/0/path = NodePath("head/Cam/hand/glock:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -0.893, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("head/Cam/hand/glock:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 90, 0 ), Vector3( 0, 90.017, -40 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "reloadglock"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("head/Cam/hand/glock:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1.7, 2.3, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.001, 0.305, 0 ), Vector3( 0.001, 0.313, 0 ), Vector3( 0.001, 0.369, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("head/Cam/hand/glock:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.7, 2.1, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 90, 0 ), Vector3( 9.518, 90, 24.9 ), Vector3( 14.848, 89.318, 25.723 ), Vector3( 18.724, 89.318, 25.723 ), Vector3( 0, 90, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("head/Cam/hand/glock/mag:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 1.7, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.216337, -1.42539, 0.0306352 ), Vector3( 0.216337, -1.42539, 0.0306352 ), Vector3( 0.216, -10.655, 0.031 ), Vector3( 0.216, -10.655, 0.031 ), Vector3( 0.216, -1.445, 0.031 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "unholsterglock"
+tracks/0/type = "value"
+tracks/0/path = NodePath("head/Cam/hand/glock:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -0.893, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("head/Cam/hand/glock:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 90.017, -40 ), Vector3( 0, 90, 0 ) ]
+}
+
+[sub_resource type="AnimationNodeTimeScale" id=8]
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "reloadglock"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "fireglock"
+
+[sub_resource type="AnimationNodeTransition" id=11]
+input_count = 2
+input_0/name = "firing"
+input_0/auto_advance = false
+input_1/name = "reloading"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=12]
+graph_offset = Vector2( -306.138, 73.3668 )
+nodes/TimeScale/node = SubResource( 8 )
+nodes/TimeScale/position = Vector2( 53.3333, 80 )
+nodes/glock_reload/node = SubResource( 9 )
+nodes/glock_reload/position = Vector2( -80, 213.333 )
+nodes/glockfire/node = SubResource( 10 )
+nodes/glockfire/position = Vector2( -213.333, 106.667 )
+nodes/gunstate/node = SubResource( 11 )
+nodes/gunstate/position = Vector2( 240, 80 )
+nodes/output/position = Vector2( 640, 80 )
+node_connections = [ "output", 0, "gunstate", "TimeScale", 0, "glockfire", "gunstate", 0, "TimeScale", "gunstate", 1, "glock_reload" ]
+
+[sub_resource type="Environment" id=13]
+background_mode = 1
+background_color = Color( 0.282353, 0.290196, 0.301961, 1 )
+background_energy = 0.0
+ambient_light_color = Color( 0.462745, 0.435294, 0.435294, 1 )
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_color = Color( 0.282353, 0.290196, 0.301961, 1 )
+fog_sun_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 3.0
+fog_depth_end = 30.0
+fog_depth_curve = 0.420448
+fog_transmit_enabled = true
+fog_transmit_curve = 0.026278
+fog_height_enabled = true
+fog_height_min = 4.0
+fog_height_max = -10.0
+fog_height_curve = 0.732044
+tonemap_exposure = 0.52
+glow_strength = 1.37
+adjustment_enabled = true
+adjustment_saturation = 1.5
+
+[node name="World" type="Spatial"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="inv" parent="." instance=ExtResource( 19 )]
+visible = false
+
+[node name="PauseScreen" parent="." instance=ExtResource( 2 )]
+pause_mode = 2
+visible = false
+script = ExtResource( 15 )
+
+[node name="Continue" parent="PauseScreen/VBoxContainer" index="0"]
+focus_neighbour_top = NodePath("../Quit")
+
+[node name="Quit" parent="PauseScreen/VBoxContainer" index="2"]
+focus_neighbour_bottom = NodePath("../Continue")
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 11 )
+
+[node name="CurrentAmmo" parent="UI/ColorRect/VBoxContainer/HBoxContainer" index="0"]
+margin_right = 0.0
+text = ""
+
+[node name="Fullammo" parent="UI/ColorRect/VBoxContainer/HBoxContainer" index="1"]
+margin_left = 4.0
+margin_right = 23.0
+
+[node name="snow" type="Particles" parent="."]
+transform = Transform( -4.37114e-08, -4.37114e-08, -1, -1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 197, 219, 0 )
+material_override = SubResource( 2 )
+amount = 20000
+visibility_aabb = AABB( -50.2579, -250.292, -250.292, 114.142, 500.592, 500.577 )
+process_material = SubResource( 3 )
+draw_pass_1 = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." groups=[
+"Player",
+] instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 185, 203, 40 )
+
+[node name="head" parent="Player" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70563, 0 )
+
+[node name="glock" parent="Player/head/Cam/hand" index="0"]
+transform = Transform( -8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0, 0 )
+
+[node name="mag" parent="Player/head/Cam/hand/glock" index="0"]
+transform = Transform( 0.657, 0, 0, 0, 0.657, 0, 0, 0, 0.5, 0.216, -1.445, 0.031 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Player/head/Cam/hand/glock" index="3"]
+transform = Transform( -3.54936e-07, 0, -5, 0, 5.41, 0, 8.12, 0, -2.18557e-07, 10.025, -0.128174, 1.76508 )
+visible = false
+texture = ExtResource( 13 )
+
+[node name="AnimationPlayer" parent="Player" index="2"]
+anims/fireglock = ExtResource( 14 )
+anims/holsterglock = SubResource( 5 )
+anims/reloadglock = SubResource( 6 )
+anims/unholsterglock = SubResource( 7 )
+
+[node name="SFXGun" type="AudioStreamPlayer3D" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57361, -1.66859 )
+stream = ExtResource( 10 )
+
+[node name="SFXEmptyGun" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="Player"]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/TimeScale/scale = 1.0
+parameters/gunstate/current = 1
+
+[node name="WalkingSnow" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 16 )
+
+[node name="snowmap" parent="." instance=ExtResource( 4 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 13 )
+
+[node name="car" parent="WorldEnvironment" instance=ExtResource( 5 )]
+transform = Transform( -0.0575371, -0.0245533, -0.998041, -0.0462756, 0.998689, -0.0219015, 0.99727, 0.0449248, -0.0585979, 179.173, 201.661, 33.7521 )
+
+[node name="post" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 189.462, 204.234, 39.3361 )
+
+[node name="Area3" parent="post" instance=ExtResource( 7 )]
+transform = Transform( 40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 3.17663, 0 )
+
+[node name="post5" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 183.889, 204.234, 84.1037 )
+
+[node name="Area3" parent="post5" instance=ExtResource( 7 )]
+transform = Transform( 40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 3.17663, 0 )
+
+[node name="post2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 194.586, 205.059, -13.1108 )
+
+[node name="Area3" parent="post2" instance=ExtResource( 7 )]
+transform = Transform( 40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 3.17664, 0 )
+
+[node name="post3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.388743, 0, -0.31445, 0, 0.5, 0, 0.31445, 0, 0.388743, 237.294, 224.399, -52.9367 )
+
+[node name="Area3" parent="post3" instance=ExtResource( 7 )]
+transform = Transform( 40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 3.17664, 0 )
+
+[node name="post4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.388743, 0, -0.31445, 0, 0.5, 0, 0.31445, 0, 0.388743, 264.417, 205.138, -91.0763 )
+
+[node name="Area3" parent="post4" instance=ExtResource( 7 )]
+transform = Transform( 40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 3.17664, 0 )
+
+[node name="ref" type="Spatial" parent="."]
+
+[node name="AudioTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="backgroundoutside" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Continue" to="PauseScreen" method="_on_Continue_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Quit" to="PauseScreen" method="_on_Quit_pressed"]
+[connection signal="pressed" from="PauseScreen/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="changed_ammo" from="Player" to="UI" method="_on_Player_changed_ammo"]
+[connection signal="changed_ammo" from="Player" to="." method="_on_Player_changed_ammo"]
+[connection signal="body_entered" from="post/Area3" to="post" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="post/Area3" to="post" method="_on_Area3_body_exited"]
+[connection signal="body_entered" from="post5/Area3" to="post5" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="post5/Area3" to="post5" method="_on_Area3_body_exited"]
+[connection signal="body_entered" from="post2/Area3" to="post2" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="post2/Area3" to="post2" method="_on_Area3_body_exited"]
+[connection signal="body_entered" from="post3/Area3" to="post3" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="post3/Area3" to="post3" method="_on_Area3_body_exited"]
+[connection signal="body_entered" from="post4/Area3" to="post4" method="_on_Area3_body_entered"]
+[connection signal="body_exited" from="post4/Area3" to="post4" method="_on_Area3_body_exited"]
+[connection signal="timeout" from="AudioTimer" to="." method="_on_AudioTimer_timeout"]
+
+[editable path="inv"]
+[editable path="PauseScreen"]
+[editable path="UI"]
+[editable path="Player"]
+[editable path="Player/head/Cam"]
+[editable path="Player/head/Cam/hand/glock"]
