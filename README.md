@@ -7,4 +7,4 @@ The focus of the game is in a Haunted are of Greenland, where time and space may
 Thats right, you are no unstoppable killing machine, you arent even used to guns, you need to do what is needed to get away.
 But you are not courageus, you arent Super police officer Chris or Jill,  *or mentally unstable James*
 
-[!Alt Giphy down??](https://media.giphy.com/media/whVs0vExNWRwsgXbzb/giphy.gif)
+![](https://github.com/pudimVEVO/strevent/blob/main/videos/giphy.gif)
