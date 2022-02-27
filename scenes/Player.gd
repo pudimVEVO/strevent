@@ -14,7 +14,7 @@ var holstered = false
 
  
 # physics
-var speed = 7
+var speed = 10
 const ACCEL_DEFAULT = 7
 const ACCEL_AIR = 1
 onready var accel = ACCEL_DEFAULT
@@ -30,10 +30,11 @@ var snap
 
 # vectors
 var direction = Vector3()
+var h_velocity = Vector3()
+var h_acceleration = 6
 var velocity = Vector3()
 var gravity_vec = Vector3()
 var movement = Vector3()
-
 
 # components
 onready var raycast = $head/Cam/GunCast
@@ -55,44 +56,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 
-#remake the fire fucking function it is causing a lotta problems and shit
-
-#func fire():
-#	if Input.is_action_just_pressed("fire1"):
-#		if magammo > 0:
-#			magammo -= 1
-#			emit_signal("changed_ammo", magammo)
-#			var b = b_decal.instance()
-#			raycast.get_collider().add_child(b)
-#			b.global_transform.origin = raycast.get_collision_point()
-#			b.look_at(raycast.get_collision_point() + raycast.get_collision_normal(), Vector3.UP)
-#			if not anim_player.is_playing():
-#				sfxgun.play()
-#				camera.translation = lerp(camera.translation, 
-#						Vector3(rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), 
-#						rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), 0), 0.5)
-#				if raycast.is_colliding():
-#					var target = raycast.get_collider()
-#					if target.is_in_group("Enemy"):
-#						target.health -= damage
-#			anim_player.play("fireglock")
-#
-#		else:
-#			sfxemptygun.play()
-#	else:
-#		camera.translation = Vector3()
-#		anim_player.stop()
-
-func reload():
-	pass
-
 func _physics_process(delta):
 	#get keyboard input
-	direction = Vector3.ZERO
-	var h_rot = global_transform.basis.get_euler().y
-	var f_input = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
-	var h_input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	direction = Vector3(h_input, 0, f_input).rotated(Vector3.UP, h_rot).normalized()
+	direction = Vector3()
+	
 	
 	#jumping and gravity
 	if is_on_floor():
@@ -108,11 +75,23 @@ func _physics_process(delta):
 		snap = Vector3.ZERO
 		gravity_vec = Vector3.UP * jump
 	
-	#make it move
-	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
-	movement = velocity + gravity_vec
+	#Moving and direction
+	if Input.is_action_pressed("move_forward"):
+		direction -= transform.basis.z
+	elif Input.is_action_pressed("move_backward"):
+		direction += transform.basis.z
+	if Input.is_action_pressed("move_left"):
+		direction -= transform.basis.x
+	elif Input.is_action_pressed("move_right"):
+		direction += transform.basis.x
 	
-	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	direction = direction.normalized()
+	h_velocity = h_velocity.linear_interpolate(direction * speed, h_acceleration * delta)
+	movement.z = h_velocity.z + gravity_vec.z
+	movement.x = h_velocity.x + gravity_vec.x
+	movement.y = gravity_vec.y
+	
+	move_and_slide(movement, Vector3.UP)
 
 
 func _process(delta):

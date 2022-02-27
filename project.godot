@@ -81,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Strevent 3D PS1 PROJECT"
-run/main_scene="res://scenes/menu.tscn"
+run/main_scene="res://scenes/test.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -96,7 +96,6 @@ Inv="*res://scenes/inv.gd"
 window/size/width=320
 window/size/height=240
 window/size/resizable=false
-window/size/fullscreen=true
 window/size/test_width=1440
 window/size/test_height=1080
 window/vsync/use_vsync=false
