@@ -96,6 +96,7 @@ Inv="*res://scenes/inv.gd"
 window/size/width=320
 window/size/height=240
 window/size/resizable=false
+window/size/fullscreen=true
 window/size/test_width=1440
 window/size/test_height=1080
 window/vsync/use_vsync=false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/glock1.material" type="Material" id=2]
-[ext_resource path="res://scenes/glock2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/model19.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/hand.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Camera.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -157,38 +158,12 @@ far = 1000.0
 
 [node name="hand" type="Spatial" parent="head/Cam"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.553, -0.329, -0.995 )
+script = ExtResource( 4 )
+sway_left = Vector3( 0, 0.1, 0 )
+sway_right = Vector3( 0, -0.1, 0 )
 
-[node name="glock" parent="head/Cam/hand" instance=ExtResource( 5 )]
-transform = Transform( -8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0, 0, 0 )
-
-[node name="ViewportContainer" type="ViewportContainer" parent="head/Cam"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport" type="Viewport" parent="head/Cam/ViewportContainer"]
-size = Vector2( 320, 240 )
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 3
-
-[node name="Guncam" type="Camera" parent="head/Cam/ViewportContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.817, 0 )
-cull_mask = 2
-fov = 65.0
-
-[node name="GunCast" type="RayCast" parent="head/Cam"]
-enabled = true
-cast_to = Vector3( 0, 0, -200 )
-
-[node name="InteractionCast" type="RayCast" parent="head/Cam"]
-enabled = true
-cast_to = Vector3( 0, 0, -5 )
-
-[node name="handloc" type="Spatial" parent="head"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.553, -0.329, -0.995 )
+[node name="model19" parent="head/Cam/hand" instance=ExtResource( 3 )]
+transform = Transform( 0.0380871, 0.0016889, -0.498544, -0.0221497, 0.499509, 0, 0.498055, 0.0220852, 0.0381246, 0.317, -0.32225, -1.009 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.0
@@ -198,4 +173,3 @@ anims/headbob = SubResource( 6 )
 anims/reloadglock = SubResource( 7 )
 
 [editable path="head/Cam"]
-[editable path="head/Cam/hand/glock"]
