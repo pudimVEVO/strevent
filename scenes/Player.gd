@@ -1,9 +1,16 @@
 extends KinematicBody
 
-var speed = 7
+const MAX_CAM_SHAKE = 0.3
 const ACCEL_DEFAULT = 7
 const ACCEL_AIR = 1
+const AMMO_IN_MAG = 6
+
 onready var accel = ACCEL_DEFAULT
+
+var ammo_spare = 10
+var ammo_weapon = 6
+
+var speed = 7
 var gravity = 9.8
 var jump = 5
 
@@ -16,10 +23,16 @@ var velocity = Vector3()
 var gravity_vec = Vector3()
 var movement = Vector3()
 
+onready var GunCast = $head/Cam/hand/GunCast
 onready var head = $head
 onready var camera = $head/Cam
+onready var anim_player = $head/Cam/AnimationPlayer
+onready var anim_tree = $AnimationTree
+
 
 func _ready():
+#	anim_tree.active = true
+	
 	#hides the cursor
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -29,6 +42,42 @@ func _input(event):
 		rotate_y(deg2rad(-event.relative.x * mouse_sense))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sense))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-89), deg2rad(89))
+
+func reload():
+	var can_reload = false
+	
+	if not anim_player.is_playing():
+		if ammo_spare != 0 or ammo_weapon != AMMO_IN_MAG:
+			can_reload = true
+	
+	if can_reload == true:
+		var ammo_needed = AMMO_IN_MAG - ammo_weapon
+		
+		if ammo_spare >= ammo_needed:
+			ammo_spare -= ammo_needed
+			ammo_weapon = AMMO_IN_MAG
+		else:
+			ammo_weapon += ammo_spare
+			ammo_spare = 0
+		
+		#anim_player.play("reloadRevolver")
+		
+	
+
+func fire():
+	if Input.is_action_just_pressed("fire1"):
+		if ammo_weapon > 0:
+			ammo_weapon -= 1
+			if not anim_player.is_playing():
+				camera.translation = lerp(camera.translation, Vector3(rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), rand_range(MAX_CAM_SHAKE, -MAX_CAM_SHAKE), 0), 0.5)
+				if GunCast.is_colliding():
+					var target = GunCast.get_collider()
+					if target.is_in_group("enemy"):
+						target.take_damage()
+			anim_player.play("RevolverFire")
+#	else:
+#		anim_player.stop()
+
 
 func _process(delta):
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
@@ -42,6 +91,9 @@ func _process(delta):
 		camera.global_transform = head.global_transform
 		
 func _physics_process(delta):
+	
+	fire()
+	
 	#get keyboard input
 	direction = Vector3.ZERO
 	var h_rot = global_transform.basis.get_euler().y
@@ -67,9 +119,13 @@ func _physics_process(delta):
 	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
 	movement = velocity + gravity_vec
 	
+# warning-ignore:return_value_discarded
 	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	
+	#headbob
 	
+#	if direction != Vector3.ZERO:
+#		anim_player.play("headbob")
 	
 
 
