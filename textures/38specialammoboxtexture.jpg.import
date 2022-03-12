@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/357magnumtexture.jpg-a3ec2f4a70e545880f18653105ddd34d.s3tc.stex"
-path.etc2="res://.import/357magnumtexture.jpg-a3ec2f4a70e545880f18653105ddd34d.etc2.stex"
+path.s3tc="res://.import/38specialammoboxtexture.jpg-20aaa250726deb53d611ec73d32a94a3.s3tc.stex"
+path.etc2="res://.import/38specialammoboxtexture.jpg-20aaa250726deb53d611ec73d32a94a3.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/357magnumtexture.jpg"
-dest_files=[ "res://.import/357magnumtexture.jpg-a3ec2f4a70e545880f18653105ddd34d.s3tc.stex", "res://.import/357magnumtexture.jpg-a3ec2f4a70e545880f18653105ddd34d.etc2.stex" ]
+source_file="res://textures/38specialammoboxtexture.jpg"
+dest_files=[ "res://.import/38specialammoboxtexture.jpg-20aaa250726deb53d611ec73d32a94a3.s3tc.stex", "res://.import/38specialammoboxtexture.jpg-20aaa250726deb53d611ec73d32a94a3.etc2.stex" ]
 
 [params]
 

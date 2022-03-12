@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://shaders/psx cull_disabled.shader" type="Shader" id=1]
+[ext_resource path="res://models/38specialboxmat.material" type="Material" id=2]
+[ext_resource path="res://textures/38specialammoboxtexture.jpg" type="Texture" id=3]
+[ext_resource path="res://scenes/pickup.gd" type="Script" id=4]
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="ArrayMesh" id=1]
+resource_name = "38specialbox_Cube001"
+surfaces/0 = {
+"aabb": AABB( -1, -1, -1, 2, 2, 2.00001 ),
+"array_data": PoolByteArray( 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 129, 0, 0, 48, 154, 59, 42, 58, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 129, 67, 63, 121, 57, 235, 42, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 95, 79, 145, 40, 38, 58, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 129, 0, 0, 49, 166, 59, 64, 50, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 98, 77, 246, 37, 77, 50, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 63, 0, 127, 127, 93, 193, 41, 239, 49, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 129, 0, 0, 48, 80, 52, 186, 59, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 0, 129, 67, 63, 14, 44, 237, 49, 0, 0, 128, 191, 0, 0, 128, 191, 0, 0, 128, 191, 127, 127, 29, 112, 190, 40, 42, 58, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 129, 0, 0, 48, 80, 52, 168, 53, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 127, 127, 30, 111, 82, 52, 170, 59, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 128, 191, 0, 127, 127, 93, 159, 57, 211, 41, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 129, 67, 63, 126, 59, 110, 49, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 98, 77, 81, 52, 163, 59, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 63, 127, 0, 96, 1, 112, 52, 173, 59, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 100, 76, 43, 52, 174, 53, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 127, 127, 93, 25, 52, 105, 53, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63, 127, 0, 97, 1, 252, 51, 193, 53, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 0, 129, 66, 63, 26, 52, 79, 53, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 127, 127, 28, 112, 218, 37, 25, 50, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 128, 191, 127, 0, 97, 1, 163, 59, 35, 58, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 127, 127, 29, 112, 254, 51, 191, 53, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 0, 127, 127, 93, 118, 59, 111, 49, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 191, 127, 0, 98, 1, 182, 59, 39, 50 ),
+"array_index_data": PoolByteArray( 0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0 ),
+"blend_shape_data": [  ],
+"format": 2194711,
+"index_count": 36,
+"material": ExtResource( 2 ),
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 24
+}
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/snapRes = 20.0
+shader_param/roughness = 1.0
+shader_param/specular = 0.0
+shader_param/uv_scale = Vector2( 1, 1 )
+shader_param/uv_offset = Vector2( 0, 0 )
+shader_param/light_intensity = 0.3
+shader_param/transparent = false
+shader_param/albedoTex = ExtResource( 3 )
+
+[node name="38specialbox" type="RigidBody" groups=["ammo_pickup"]]
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.740517, 0, 0, 0, 0.852615, 0, 0, 0, 1, 0, 0.72381, 0 )
+shape = SubResource( 3 )
+
+[node name="38Specialbox" type="MeshInstance" parent="."]
+transform = Transform( 0.740517, 0, 0, 0, 0.852615, 0, 0, 0, 1, 0, 0.72381, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )

@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
+[ext_resource path="res://scenes/38specialbullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/model19.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/hand.gd" type="Script" id=4]
 [ext_resource path="res://scenes/Camera.tscn" type="PackedScene" id=6]
@@ -34,6 +35,102 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector3( 0, -90, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hand/model19/model19/cylinder:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("hand/model19/model19/cylinder:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("hand/model19/model19/cylinder_spin/cylinder:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.175733, -0.438406, -0.0118202 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("hand/model19/model19/cylinder_spin/cylinder:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("hand/model19/bullets/38specialbullet:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("hand/model19/bullets/38specialbullet:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("hand/model19/bullets/38specialbullet2:translation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("hand/model19/bullets/38specialbullet2:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -82,6 +179,131 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=13]
 resource_name = "revolverReload"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand/model19:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.179, -0.024, 0 ), Vector3( -0.172, -0.01, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand/model19:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( -15, -60, 15 ), Vector3( -20, -60, 15 ), Vector3( -20, -60, 25 ), Vector3( -16, -70, 25 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("hand/model19/model19/cylinder_spin/cylinder:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.175733, -0.438406, -0.0118202 ), Vector3( 0.175733, -0.438406, -0.0118202 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("hand/model19/model19/cylinder_spin/cylinder:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 70, 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("hand/model19/bullets/38specialbullet:translation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.488676, 1.56915, -4.48295 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("hand/model19/bullets/38specialbullet:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -16, -70, 25 ), Vector3( -67.2819, -177.067, -151.27 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("hand/model19/bullets/38specialbullet2:translation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0.290869, 1.53095, -4.3619 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("hand/model19/bullets/38specialbullet2:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1.4, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -67, -177, -151 ), Vector3( -67, -177, -157.818 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "simpleReloadRevolver"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("hand/model19:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -0.03, -0.442, 0.609 ), Vector3( -0.03, -0.442, 0.609 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("hand/model19:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( 0, -50, 0 ), Vector3( 0, -50, 0 ), Vector3( 0, -90, 0 ) ]
+}
 
 [sub_resource type="AnimationNodeTransition" id=7]
 input_count = 2
@@ -101,7 +323,7 @@ nodes/headbob/node = SubResource( 8 )
 nodes/headbob/position = Vector2( -293.333, 106.667 )
 node_connections = [ "output", 0, "head_hand", "head_hand", 0, "headbob" ]
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=["player"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -126,17 +348,36 @@ sway_left = Vector3( 0, 0.1, 0 )
 sway_right = Vector3( 0, -0.1, 0 )
 
 [node name="model19" parent="head/Cam/hand" instance=ExtResource( 3 )]
-transform = Transform( -8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74229e-09, 0, 0, 0 )
+transform = Transform( -8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, 0, 0, 0 )
 
 [node name="model19" parent="head/Cam/hand/model19" index="0"]
 layers = 2
 
-[node name="cylinder" parent="head/Cam/hand/model19/model19" index="0"]
-layers = 2
+[node name="cylinder" parent="head/Cam/hand/model19/model19" index="1"]
+visible = false
+layers = 0
 
-[node name="trigger" parent="head/Cam/hand/model19/model19" index="1"]
+[node name="trigger" parent="head/Cam/hand/model19/model19" index="2"]
 transform = Transform( 0.889429, -0.45685, -0.0142742, 0.457066, 0.888821, 0.0329975, -0.00238767, -0.0358732, 0.999354, 0, 0, 0 )
 layers = 2
+
+[node name="bullets" type="Spatial" parent="head/Cam/hand/model19"]
+transform = Transform( 0.41944, 0.406247, 0.811809, 0.0902029, 0.871199, -0.482572, -0.903291, 0.275637, 0.328771, 3.03576, -3.19013, 1.92991 )
+visible = false
+
+[node name="38specialbullet" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="38specialbullet2" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="38specialbullet3" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
+
+[node name="38specialbullet4" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
+
+[node name="38specialbullet5" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
+
+[node name="38specialbullet6" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
 
 [node name="GunCast" type="RayCast" parent="head/Cam/hand"]
 transform = Transform( -2.18342e-08, -9.68194e-10, -0.5, -0.0221497, 0.499509, 0, 0.499509, 0.0221497, -2.18557e-08, 0, 0.14, 0 )
@@ -148,6 +389,11 @@ anims/RESET = SubResource( 12 )
 anims/RevolverFire = SubResource( 11 )
 anims/headbob = SubResource( 10 )
 anims/revolverReload = SubResource( 13 )
+anims/simpleReloadRevolver = SubResource( 14 )
+
+[node name="InteractCast" type="RayCast" parent="head/Cam"]
+enabled = true
+cast_to = Vector3( 0, 0, -2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 4 )
