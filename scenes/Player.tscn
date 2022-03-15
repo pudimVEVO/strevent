@@ -132,6 +132,18 @@ tracks/9/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("..:translation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1.7, 0 ) ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "RevolverFire"
@@ -165,16 +177,16 @@ tracks/1/keys = {
 resource_name = "headbob"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:translation")
+tracks/0/path = NodePath("..:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.0816996, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.2, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 1.7, 0 ), Vector3( 0, 1.86354, 0 ), Vector3( 0, 1.7, 0 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -324,6 +336,8 @@ nodes/headbob/position = Vector2( -293.333, 106.667 )
 node_connections = [ "output", 0, "head_hand", "head_hand", 0, "headbob" ]
 
 [node name="Player" type="KinematicBody" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -366,10 +380,8 @@ transform = Transform( 0.41944, 0.406247, 0.811809, 0.0902029, 0.871199, -0.4825
 visible = false
 
 [node name="38specialbullet" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="38specialbullet2" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="38specialbullet3" parent="head/Cam/hand/model19/bullets" instance=ExtResource( 2 )]
 
@@ -394,6 +406,7 @@ anims/simpleReloadRevolver = SubResource( 14 )
 [node name="InteractCast" type="RayCast" parent="head/Cam"]
 enabled = true
 cast_to = Vector3( 0, 0, -2 )
+collision_mask = 3
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 4 )

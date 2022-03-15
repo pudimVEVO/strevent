@@ -59,9 +59,20 @@ func interact():
 		if IntCast.is_colliding():
 			var interact_target = IntCast.get_collider()
 			if interact_target.is_in_group("ammo_pickup"):
-				print("im interacting with a ammo pickup")
 				ammo_spare += 3
 				interact_target.interacted = true
+			
+			if interact_target.is_in_group("door"):
+				if interact_target.is_open == false:
+					interact_target.open()
+				else:
+					interact_target.close()
+			
+			if interact_target.is_in_group("doubledoor"):
+				if interact_target.is_open == false:
+					interact_target.open()
+				else:
+					interact_target.close()
 
 func reload():
 	if Input.is_action_just_pressed("reload"):
@@ -143,8 +154,8 @@ func _physics_process(delta):
 	
 	#headbob
 	
-#	if direction != Vector3.ZERO:
-#		anim_player.play("headbob")
+	if direction != Vector3.ZERO:
+		anim_player.play("headbob")
 	
 
 
